@@ -920,13 +920,14 @@ if __name__ == "__main__":
             df.rename(columns={"variable": "is_treated"}, inplace=True)
             del df['value']
 
-            name = "graph_modularity_{}_degree_{}_{}.csv".format(Q, d, uuid4())
+            rand_name = uuid4()
+            name = "graph_modularity_{}_degree_{}_{}.csv".format(Q, d, rand_name)
             df.to_csv(name, index=False)
             print(df.shape)
 
             print("writing graph in the GraphML format under the filename random_modular_graph.graphml")
             # The graphml file can be uploaded in Gephi (http://gephi.github.io/) for graph visualization.
-            nx.write_graphml(G, "random_modular_graph.graphml")
+            nx.write_graphml(G, "graph_modularity_{}_degree_{}_{}.graphml".format(Q, d, rand_name)
 
         except (IndexError, IOError):
             print("try again")
